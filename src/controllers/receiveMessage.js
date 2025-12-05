@@ -15,12 +15,10 @@ const receiveMessage = async (req, res) => {
         const phone = from.replace("whatsapp:", "");
 
         const booking = await Booking.findOne({ phone, status: "PENDING" }).sort({ createdAt: -1 });
-        console.log("Before Updating : ",booking )
 
         booking.documentUrl = imageUrl;
         const response = await booking.save();
-        console.log("After Updating : ",response )
-        
+
         return res.send(`<Response><Message>DL image receive ho gaya 🙏</Message></Response>`);
 
     } catch (err) {
